@@ -4,7 +4,7 @@ require_relative "App"
 require "pry"
 
 #menu with options for the user to choose from
-menu_options = ["1. Buy an item", "2. Return Item", "3. Request new items", "4. Show money left in wallet", "5. Add money to wallet"]
+menu_options = ["1. Buy an item", "2. Return Item", "3. Request new items", "4. Show money left in wallet", "5. Add money to wallet", "6. View stores Inventory"]
 app_name = "Shopping app"
 stores = []
 application = App.new(app_name, stores)
@@ -90,14 +90,12 @@ while true
             else
                 puts "Which store are you returning to?"
                 store_choice = gets.chomp.to_i
-                binding.pry
+                item_name = user_1.cart[return_choice-1][:name]
                 user_1.return_item(return_choice, store_choice)
                 binding.pry
-                item_name = user_1.cart[return_choice-1][:name]
+                #This here doesn't fully work 
+                item_index = application.stores[store_choice-1].items.index { |x| x[:name] == item_name}
                 binding.pry
-                item_index = application.stores[store_choice-1].items { |x| x == item_name}
-                binding.pry
-
                 application.stores[store_choice-1].items[item_index][:quantity] += 1
             end 
 
@@ -134,6 +132,13 @@ while true
         puts "How much would you like to add?"
         amount = gets.chomp.to_i
         user_1.add_money(amount)
+    when 6
+        application.stores.each do |x|
+            puts "The #{x.name} store has"
+            x.items.each {|x| puts "#{x[:name]}"}
+        end 
+    else 
+        exit 
     end 
 end
 

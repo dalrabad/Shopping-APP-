@@ -17,7 +17,7 @@ class App
     end
 
     def main_menu(menu_options)
-        puts" What would you like to do?"
+        puts"What would you like to do?"
         menu_options.each {|x| puts"#{x}"}
     end
 
