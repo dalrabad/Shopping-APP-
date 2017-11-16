@@ -4,9 +4,5 @@ class Store
     def initialize(name, items)
         @name = name 
         @items = items
-    end 
-
-    def add_item(name, price, qauntatity)
-        @items.push({:name => new_item, :price=> price, :quantity=> q})
-    end 
+    end
 end 
